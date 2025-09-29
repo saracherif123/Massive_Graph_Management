@@ -12,6 +12,8 @@
 \usepackage{enumitem}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{booktabs}
+\usepackage{array}
 
 \geometry{margin=2.5cm}
 
@@ -293,6 +295,27 @@ If there's an odd cycle, the function stops early and returns (False, color).
 \item Handles disconnected graphs
 \end{itemize}
 
+\section{Dijkstra's Algorithm Results}
+
+\subsection{Final Results: Shortest Paths from Node A}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ccc}
+\toprule
+Destination & Distance & Path \\
+\midrule
+a & 0 & a \\
+g & 1 & a $\rightarrow$ g \\
+f & 2 & a $\rightarrow$ g $\rightarrow$ f \\
+e & 3 & a $\rightarrow$ g $\rightarrow$ e \\
+c & 4 & a $\rightarrow$ g $\rightarrow$ e $\rightarrow$ c \\
+b & 5 & a $\rightarrow$ g $\rightarrow$ e $\rightarrow$ b \\
+d & 6 & a $\rightarrow$ g $\rightarrow$ e $\rightarrow$ c $\rightarrow$ d \\
+\bottomrule
+\end{tabular}
+\caption{Shortest paths from node a to all other nodes}
+\end{table}
 
 
 \section{Code References}
