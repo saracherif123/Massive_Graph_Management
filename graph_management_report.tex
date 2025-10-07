@@ -297,7 +297,94 @@ If there's an odd cycle, the function stops early and returns (False, color).
 
 \section{Dijkstra's Algorithm Results}
 
-\subsection{Final Results: Shortest Paths from Node A}
+\subsection{Step-by-Step Execution of Dijkstra's Algorithm}
+
+I'll solve this step-by-step using Dijkstra's algorithm with source vertex $s = a$.
+
+\subsubsection{Initial Setup}
+
+\begin{itemize}
+    \item $\text{dist} = \{a: 0\}$
+    \item $P = \emptyset$ (processed vertices)
+    \item $\text{dist}[v] = \infty$ for all $v \neq a$
+\end{itemize}
+
+\subsubsection{Iteration-by-Iteration Execution}
+
+\textbf{Iteration 1:}
+\begin{itemize}
+    \item Select $w = a$ (min distance = 0)
+    \item $P = \{a\}$
+    \item Update neighbors of $a$:
+    \begin{itemize}
+        \item $f$: $\text{dist}[f] = \min(\infty, 0 + 3) = 3$, predecessor$[f] = a$
+        \item $g$: $\text{dist}[g] = \min(\infty, 0 + 1) = 1$, predecessor$[g] = a$
+    \end{itemize}
+\end{itemize}
+
+Current distances: $\{a: 0, f: 3, g: 1, b: \infty, e: \infty, c: \infty, d: \infty\}$
+
+\textbf{Iteration 2:}
+\begin{itemize}
+    \item Select $w = g$ (min unprocessed distance = 1)
+    \item $P = \{a, g\}$
+    \item Update neighbors of $g$:
+    \begin{itemize}
+        \item $f$: $\text{dist}[f] = \min(3, 1 + 1) = 2$, predecessor$[f] = g$
+        \item $e$: $\text{dist}[e] = \min(\infty, 1 + 2) = 3$, predecessor$[e] = g$
+    \end{itemize}
+\end{itemize}
+
+Current distances: $\{a: 0, g: 1, f: 2, e: 3, b: \infty, c: \infty, d: \infty\}$
+
+\textbf{Iteration 3:}
+\begin{itemize}
+    \item Select $w = f$ (min unprocessed distance = 2)
+    \item $P = \{a, g, f\}$
+    \item Update neighbors of $f$:
+    \begin{itemize}
+        \item $b$: $\text{dist}[b] = \min(\infty, 2 + 4) = 6$, predecessor$[b] = f$
+        \item $e$: $\text{dist}[e] = \min(3, 2 + 2) = 3$ (no change)
+    \end{itemize}
+\end{itemize}
+
+Current distances: $\{a: 0, g: 1, f: 2, e: 3, b: 6, c: \infty, d: \infty\}$
+
+\textbf{Iteration 4:}
+\begin{itemize}
+    \item Select $w = e$ (min unprocessed distance = 3)
+    \item $P = \{a, g, f, e\}$
+    \item Update neighbors of $e$:
+    \begin{itemize}
+        \item $c$: $\text{dist}[c] = \min(\infty, 3 + 1) = 4$, predecessor$[c] = e$
+        \item $d$: $\text{dist}[d] = \min(\infty, 3 + 5) = 8$, predecessor$[d] = e$
+    \end{itemize}
+\end{itemize}
+
+Current distances: $\{a: 0, g: 1, f: 2, e: 3, c: 4, b: 6, d: 8\}$
+
+\textbf{Iteration 5:}
+\begin{itemize}
+    \item Select $w = c$ (min unprocessed distance = 4)
+    \item $P = \{a, g, f, e, c\}$
+    \item Update neighbors of $c$:
+    \begin{itemize}
+        \item $b$: $\text{dist}[b] = \min(6, 4 + 3) = 6$ (no change)
+        \item $d$: $\text{dist}[d] = \min(8, 4 + 2) = 6$, predecessor$[d] = c$
+    \end{itemize}
+\end{itemize}
+
+Current distances: $\{a: 0, g: 1, f: 2, e: 3, c: 4, b: 6, d: 6\}$
+
+\textbf{Iterations 6 \& 7:}
+\begin{itemize}
+    \item Process $b$ (distance 6) and $d$ (distance 6)
+    \item No more updates needed
+\end{itemize}
+
+\subsubsection{Final Results}
+
+Shortest distances from vertex $a$:
 
 \begin{table}[h]
 \centering
@@ -305,18 +392,365 @@ If there's an odd cycle, the function stops early and returns (False, color).
 \toprule
 Destination & Distance & Path \\
 \midrule
-a & 0 & a \\
-g & 1 & a $\rightarrow$ g \\
-f & 2 & a $\rightarrow$ g $\rightarrow$ f \\
-e & 3 & a $\rightarrow$ g $\rightarrow$ e \\
-c & 4 & a $\rightarrow$ g $\rightarrow$ e $\rightarrow$ c \\
-b & 5 & a $\rightarrow$ g $\rightarrow$ e $\rightarrow$ b \\
-d & 6 & a $\rightarrow$ g $\rightarrow$ e $\rightarrow$ c $\rightarrow$ d \\
+$a \rightarrow a$ & 0 & $a$ \\
+$a \rightarrow g$ & 1 & $a \rightarrow g$ \\
+$a \rightarrow f$ & 2 & $a \rightarrow g \rightarrow f$ \\
+$a \rightarrow e$ & 3 & $a \rightarrow g \rightarrow e$ \\
+$a \rightarrow c$ & 4 & $a \rightarrow g \rightarrow e \rightarrow c$ \\
+$a \rightarrow b$ & 6 & $a \rightarrow g \rightarrow f \rightarrow b$ \\
+$a \rightarrow d$ & 6 & $a \rightarrow g \rightarrow e \rightarrow c \rightarrow d$ \\
 \bottomrule
 \end{tabular}
 \caption{Shortest paths from node a to all other nodes}
 \end{table}
 
+\section{Matrix Multiplication and Graph Powers}
+
+\subsection{Exercise: Matrix Multiplication \& Power}
+
+\subsubsection{1) Different Representations of These Graphs}
+
+\textbf{Left Graph (Undirected):}
+
+\textbf{Edge List:}
+\begin{itemize}
+    \item (0,1), (0,4), (1,2), (1,5), (2,3), (3,5), (4,5)
+\end{itemize}
+
+\textbf{Adjacency Matrix A:}
+\begin{equation}
+A = \begin{bmatrix}
+0 & 1 & 0 & 0 & 1 & 0 \\
+1 & 0 & 1 & 0 & 0 & 1 \\
+0 & 1 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 & 0 & 1 \\
+0 & 1 & 0 & 1 & 1 & 0
+\end{bmatrix}
+\end{equation}
+
+\textbf{Adjacency List:}
+\begin{itemize}
+    \item 0: \{1, 4\}
+    \item 1: \{0, 2, 5\}
+    \item 2: \{1, 3\}
+    \item 3: \{2, 5\}
+    \item 4: \{0, 5\}
+    \item 5: \{1, 3, 4\}
+\end{itemize}
+
+\textbf{Right Graph (Directed):}
+
+\textbf{Edge List:}
+\begin{itemize}
+    \item (0,1), (0,4), (1,5), (2,3), (3,3), (4,5), (5,4)
+\end{itemize}
+
+\textbf{Adjacency Matrix A:}
+\begin{equation}
+A = \begin{bmatrix}
+0 & 1 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 & 1 & 0
+\end{bmatrix}
+\end{equation}
+
+\textbf{Adjacency List:}
+\begin{itemize}
+    \item 0: \{1, 4\}
+    \item 1: \{5\}
+    \item 2: \{3\}
+    \item 3: \{3\}
+    \item 4: \{5\}
+    \item 5: \{4\}
+\end{itemize}
+
+\subsubsection{2) Compute A², A³ and Meaning of A^r_ij}
+
+\textbf{For the Left Graph (Undirected):}
+
+\textbf{A²:}
+\begin{equation}
+A^2 = \begin{bmatrix}
+2 & 0 & 1 & 0 & 0 & 2 \\
+0 & 3 & 0 & 2 & 1 & 0 \\
+1 & 0 & 2 & 0 & 0 & 2 \\
+0 & 2 & 0 & 2 & 1 & 0 \\
+0 & 1 & 0 & 1 & 2 & 0 \\
+2 & 0 & 2 & 0 & 0 & 3
+\end{bmatrix}
+\end{equation}
+
+\textbf{A³:}
+\begin{equation}
+A^3 = \begin{bmatrix}
+0 & 5 & 0 & 4 & 4 & 0 \\
+5 & 0 & 6 & 0 & 0 & 7 \\
+0 & 6 & 0 & 5 & 3 & 0 \\
+4 & 0 & 5 & 0 & 0 & 6 \\
+4 & 0 & 3 & 0 & 0 & 5 \\
+0 & 7 & 0 & 6 & 5 & 0
+\end{bmatrix}
+\end{equation}
+
+\textbf{For the Right Graph (Directed):}
+
+\textbf{A²:}
+\begin{equation}
+A^2 = \begin{bmatrix}
+0 & 0 & 0 & 0 & 1 & 2 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1
+\end{bmatrix}
+\end{equation}
+
+\textbf{A³:}
+\begin{equation}
+A^3 = \begin{bmatrix}
+0 & 0 & 0 & 0 & 1 & 1 \\
+0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 & 1 & 0
+\end{bmatrix}
+\end{equation}
+
+\textbf{Meaning of A^r_ij:}
+
+$A^r_{ij}$ represents the number of walks (paths that may repeat vertices) of length exactly $r$ from vertex $i$ to vertex $j$.
+
+\textbf{Examples:}
+\begin{itemize}
+    \item $A^2[0,5] = 2$ (left graph) means there are 2 walks of length 2 from vertex 0 to vertex 5: $(0 \rightarrow 1 \rightarrow 5)$ and $(0 \rightarrow 4 \rightarrow 5)$
+    \item $A^3[1,5] = 7$ (left graph) means there are 7 walks of length 3 from vertex 1 to vertex 5
+\end{itemize}
+
+\subsubsection{3) Complexity of A^r and Possible Reduction}
+
+\textbf{Naive Approach:}
+
+Computing $A^r$ by repeated matrix multiplication:
+\begin{itemize}
+    \item $A^2 = A \times A$
+    \item $A^3 = A^2 \times A$
+    \item $A^r = A^{r-1} \times A$
+\end{itemize}
+
+For an $n \times n$ matrix, one multiplication takes $O(n^3)$ time (or $O(n^{2.37})$ with Strassen's algorithm).
+Computing $A^r$ requires $(r-1)$ multiplications: \textbf{$O(r \cdot n^3)$}
+
+\textbf{Optimized Approach - Exponentiation by Squaring:}
+
+We can reduce the number of multiplications using binary exponentiation:
+\begin{itemize}
+    \item Compute $A^1, A^2, A^4, A^8, \ldots$, by repeated squaring
+    \item Combine results based on binary representation of $r$
+\end{itemize}
+
+\textbf{Complexity:} $O(\log r \cdot n^3)$ or $O(\log r \cdot n^{2.37})$ with fast matrix multiplication
+
+\textbf{Example:} To compute $A^{10}$:
+\begin{itemize}
+    \item $10 = 1010_2 = 8 + 2$
+    \item Compute: $A^1 \rightarrow A^2 \rightarrow A^4 \rightarrow A^8$
+    \item Result: $A^{10} = A^8 \times A^2$
+    \item Only 4 multiplications instead of 9!
+\end{itemize}
+
+\textbf{Reduction:} Yes, from $O(r \cdot n^3)$ to \textbf{$O(\log r \cdot n^3)$} - exponential improvement in $r$!
+
+\section{Linear Algebra Exercises}
+
+\subsection{Exercise 1: Matrix Analysis}
+
+\textbf{Problem:} What could you say about these matrices?
+
+Let me call them $A = \begin{pmatrix} -1 & \frac{3}{2} \\ 1 & -1 \end{pmatrix}$, $B = \begin{pmatrix} -1 & \frac{3}{2} \\ \frac{2}{3} & -1 \end{pmatrix}$, $C = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$
+
+\textbf{Observations:}
+\begin{itemize}
+    \item \textbf{C is the identity matrix $I_3$}
+    \item \textbf{A is not symmetric} ($A \neq A^T$)
+    \item \textbf{B is symmetric} ($B = B^T$)
+    \item Both A and B have trace = -2 and similar structure
+    \item C is orthogonal, symmetric, and idempotent
+\end{itemize}
+
+\subsection{Exercise 2: Matrix Powers and Diagonalization}
+
+\textbf{Problem:} Show that $A^n = X\Lambda^nX^{-1}$
+
+\textbf{Proof:}
+If A is diagonalizable, then $A = X\Lambda X^{-1}$ where $\Lambda$ is diagonal matrix of eigenvalues and X is matrix of eigenvectors.
+
+Then:
+\begin{itemize}
+    \item $A^2 = (X\Lambda X^{-1})(X\Lambda X^{-1}) = X\Lambda(X^{-1}X)\Lambda X^{-1} = X\Lambda^2X^{-1}$
+    \item $A^3 = A^2 \cdot A = (X\Lambda^2X^{-1})(X\Lambda X^{-1}) = X\Lambda^3X^{-1}$
+\end{itemize}
+
+By induction:
+\begin{itemize}
+    \item \textbf{Base case:} $A^1 = X\Lambda^1X^{-1}$ ✓
+    \item \textbf{Inductive step:} If $A^k = X\Lambda^kX^{-1}$, then $A^{k+1} = A^k \cdot A = (X\Lambda^kX^{-1})(X\Lambda X^{-1}) = X\Lambda^{k+1}X^{-1}$ ✓
+\end{itemize}
+
+Therefore \textbf{$A^n = X\Lambda^nX^{-1}$} for all $n \geq 1$.
+
+\subsection{Exercise 3: Eigenvalues and Eigenvectors of A^T A and AA^T}
+
+\textbf{Problem:} Find eigenvalues and unit eigenvectors of $A^T A$ and $AA^T$
+
+Given: $A = \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}$ (Fibonacci matrix)
+
+\textbf{Computing $A^T A$:}
+$$A^T A = \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}$$
+
+\textbf{Eigenvalues of $A^T A$:}
+$$\det(A^T A - \lambda I) = \det\begin{pmatrix} 2-\lambda & 1 \\ 1 & 1-\lambda \end{pmatrix} = (2-\lambda)(1-\lambda) - 1 = \lambda^2 - 3\lambda + 1 = 0$$
+
+$$\lambda = \frac{3 \pm \sqrt{9-4}}{2} = \frac{3 \pm \sqrt{5}}{2}$$
+
+\textbf{$\lambda_1 = \frac{3+\sqrt{5}}{2} \approx 2.618$} (golden ratio squared: $\phi^2$)
+
+\textbf{$\lambda_2 = \frac{3-\sqrt{5}}{2} \approx 0.382$}
+
+\textbf{Unit eigenvectors of $A^T A$:}
+
+For $\lambda_1 = \frac{3+\sqrt{5}}{2}$:
+$$v_1 = \frac{1}{\sqrt{2+\sqrt{5}}}\begin{pmatrix} \frac{1+\sqrt{5}}{2} \\ 1 \end{pmatrix}$$
+
+For $\lambda_2 = \frac{3-\sqrt{5}}{2}$:
+$$v_2 = \frac{1}{\sqrt{2-\sqrt{5}}}\begin{pmatrix} \frac{1-\sqrt{5}}{2} \\ 1 \end{pmatrix}$$
+
+\textbf{Computing $AA^T$:}
+$$AA^T = \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}$$
+
+\textbf{Note:} $AA^T = A^T A$ in this case! So eigenvalues and eigenvectors are the same.
+
+\subsection{Exercise 4: Matrix Decomposition Analysis}
+
+\textbf{Problem:} Without multiplying S, find determinant, eigenvalues, eigenvectors, and why S is positive definite
+
+$$S = \begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix}\begin{bmatrix} 2 & 0 \\ 0 & 5 \end{bmatrix}\begin{bmatrix} \cos \theta & \sin \theta \\ -\sin \theta & \cos \theta \end{bmatrix}$$
+
+Let $R(\theta) = \begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix}$ (rotation matrix)
+
+Then $S = R(\theta) \cdot D \cdot R(\theta)^T$ where $D = \text{diag}(2, 5)$
+
+\textbf{Determinant:}
+$$\det(S) = \det(R) \cdot \det(D) \cdot \det(R^T) = 1 \cdot 10 \cdot 1 = \textbf{10}$$
+
+\textbf{Eigenvalues:}
+S is similar to D (conjugate by rotation), so eigenvalues are \textbf{$\lambda_1 = 2, \lambda_2 = 5$}
+
+\textbf{Eigenvectors:}
+The eigenvectors of D are $e_1 = (1,0)^T$ and $e_2 = (0,1)^T$
+
+The eigenvectors of S are rotated versions:
+\begin{itemize}
+    \item \textbf{$v_1 = (\cos \theta, \sin \theta)^T$} for $\lambda_1 = 2$
+    \item \textbf{$v_2 = (-\sin \theta, \cos \theta)^T$} for $\lambda_2 = 5$
+\end{itemize}
+
+\textbf{Why S is positive definite:}
+\begin{itemize}
+    \item All eigenvalues are positive ($2 > 0, 5 > 0$)
+    \item S is symmetric ($S = S^T$)
+    \item Therefore S is \textbf{positive definite}
+\end{itemize}
+
+\subsection{Exercise 5: Positive Definite Conditions}
+
+\textbf{Problem:} For what c and d are S and T positive definite?
+
+$$S = \begin{pmatrix} c & 1 & 1 \\ 1 & c & 1 \\ 1 & 1 & c \end{pmatrix}, \quad T = \begin{pmatrix} 1 & 2 & 3 \\ 2 & d & 4 \\ 3 & 4 & 5 \end{pmatrix}$$
+
+\textbf{For S to be positive definite:}
+Using Sylvester's criterion (all leading principal minors > 0):
+
+\begin{enumerate}
+    \item $c > 0$
+    \item $\det\begin{pmatrix} c & 1 \\ 1 & c \end{pmatrix} = c^2 - 1 > 0 \implies c > 1$
+    \item $\det(S) = c^3 + 2 - 3c = (c-1)^2(c+2) > 0 \implies c > 1$ (since $c+2 > 0$ when $c > 0$)
+\end{enumerate}
+
+\textbf{Answer for S: $c > 1$}
+
+\textbf{For T to be positive definite:}
+\begin{enumerate}
+    \item $1 > 0$ ✓
+    \item $\det\begin{pmatrix} 1 & 2 \\ 2 & d \end{pmatrix} = d - 4 > 0 \implies d > 4$
+    \item $\det(T) = 1(5d - 16) - 2(10 - 12) + 3(8 - 3d) = 5d - 16 + 4 + 24 - 9d = 12 - 4d > 0 \implies d < 3$
+\end{enumerate}
+
+But we need $d > 4$ AND $d < 3$, which is \textbf{impossible!}
+
+\textbf{Answer for T: No values of d make T positive definite} (T has rank ≤ 2 since rows are nearly linearly dependent)
+
+\subsection{Exercise 6: Eigenvalues of Matrix Powers}
+
+\textbf{Problem:} Show if $\lambda_1, \lambda_2, \ldots, \lambda_n$ are eigenvalues of A, then $A^m$ has eigenvalues $\lambda_1^m, \lambda_2^m, \ldots, \lambda_n^m$
+
+\textbf{Proof:}
+If $Av = \lambda v$ (v is eigenvector with eigenvalue $\lambda$), then:
+\begin{itemize}
+    \item $A^2v = A(Av) = A(\lambda v) = \lambda(Av) = \lambda^2v$
+    \item $A^3v = A(A^2v) = A(\lambda^2v) = \lambda^2(Av) = \lambda^3v$
+\end{itemize}
+
+By induction: \textbf{$A^mv = \lambda^mv$}
+
+Therefore, if $\lambda$ is an eigenvalue of A with eigenvector v, then \textbf{$\lambda^m$ is an eigenvalue of $A^m$ with the same eigenvector v}.
+
+\subsection{Exercise 7: Determinant of Orthogonal Matrices}
+
+\textbf{Problem:} What is the determinant of any orthogonal matrix?
+
+An orthogonal matrix Q satisfies $Q^TQ = I$
+
+Taking determinants: $\det(Q^TQ) = \det(I)$
+
+$\det(Q^T) \cdot \det(Q) = 1$
+
+$\det(Q)^2 = 1$
+
+\textbf{Answer: $\det(Q) = \pm 1$}
+
+\subsection{Exercise 8: Laplacian Matrix Properties}
+
+\textbf{Problem:} Laplacian matrix properties
+
+For an undirected graph, the \textbf{Laplacian matrix $L = D - A$} where:
+\begin{itemize}
+    \item D = diagonal degree matrix
+    \item A = adjacency matrix
+\end{itemize}
+
+\textbf{Properties to show:}
+
+\textbf{(a) L is symmetric:}
+Since A is symmetric (undirected graph) and D is diagonal (symmetric), $L = D - A$ is symmetric. ✓
+
+\textbf{(b) L is positive semi-definite:}
+For any vector x:
+$$x^TLx = x^T(D-A)x = \sum_i d_i x_i^2 - \sum_{i,j} A_{ij} x_i x_j = \frac{1}{2}\sum_{(i,j) \in E} (x_i - x_j)^2 \geq 0$$
+
+Therefore L is positive semi-definite. ✓
+
+\textbf{(c) L has 0 as an eigenvalue:}
+$$L\mathbf{1} = (D-A)\mathbf{1} = D\mathbf{1} - A\mathbf{1} = \mathbf{0}$$ (since each row sum of A equals the degree)
+
+The vector $\mathbf{1} = (1,1,\ldots,1)^T$ is an eigenvector with eigenvalue 0. ✓
+
+This is the smallest eigenvalue because L is positive semi-definite (all eigenvalues ≥ 0).
 
 \section{Code References}
 
