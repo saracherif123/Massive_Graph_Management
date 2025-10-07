@@ -751,6 +751,65 @@ $$L\mathbf{1} = (D-A)\mathbf{1} = D\mathbf{1} - A\mathbf{1} = \mathbf{0}$$ (sinc
 The vector $\mathbf{1} = (1,1,\ldots,1)^T$ is an eigenvector with eigenvalue 0. ✓
 
 This is the smallest eigenvalue because L is positive semi-definite (all eigenvalues ≥ 0).
+\section{Random Walk on Graphs}
+\subsection{Proof 1: Lazy Random Walk is still Stochastic}
+
+A \emph{lazy random walk} on a graph \( G = (V, E) \) is defined such that at each step:
+\begin{itemize}
+    \item with probability \( \frac{1}{2} \), the walker stays at the current node (self cycles),
+    \item with probability \( \frac{1}{2} \), the walker moves to a neighbor chosen at random from a unform distribution.
+\end{itemize}
+
+from the definition of the simple random walk, \( A \) be the adjacency matrix and \( D = \mathrm{diag}(d_1, \dots, d_n) \) the degree matrix.  
+The transition matrix of a simple random walk is given by
+\[
+P = D^{-1}A.
+\]
+For the lazy random walk, if we stay on the same node i, this is equal to the identity matrix I, and the transition matrix becomes
+
+
+\begin{enumerate}
+    \item With probability \( \tfrac{1}{2} \), the walker remains on the same node.
+    This is represented by the \emph{identity matrix} \( I \), since
+    \[
+    I_{ij} =
+    \begin{cases}
+    1, & \text{if } i = j,\\[4pt]
+    0, & \text{otherwise.}
+    \end{cases}
+    \]
+    It encodes a self-loop transition (staying at node \( i \)).
+    \item With probability \( \tfrac{1}{2} \), the walker follows the standard random walk step given by \( P = D^{-1}A \).
+\end{enumerate}
+\[
+P_{\text{lazy}} = \frac{1}{2}I + \frac{1}{2}P = \frac{1}{2}\left(I + D^{-1}A\right).
+\]
+
+\paragraph{To proof that \(P_{\text{lazy}}\) is stochastic.}
+We must show that each row of \( P_{\text{lazy}} \) sums to 1.  
+For the \( i^{\text{th}} \) row:
+\[
+\sum_{j}(P_{\text{lazy}})_{ij}
+= \frac{1}{2}\sum_{j}I_{ij} + \frac{1}{2}\sum_{j}P_{ij}
+= \frac{1}{2}(1 + 1) = 1.
+\]
+Hence \( P_{\text{lazy}} \) is row-stochastic.
+
+\paragraph{Consequence.}
+The addition of self-loops (\( \frac{1}{2}I \)) makes the chain \emph{aperiodic} and thus \emph{primitive}.  
+By the Perron–Frobenius theorem, \( P_{\text{lazy}} \) admits a unique stationary distribution \( \pi \) satisfying
+\[
+\pi = \pi P_{\text{lazy}}, \quad \text{with} \quad \sum_i \pi_i = 1.
+\]
+
+
+
+
+
+
+
+
+
 
 \section{Code References}
 
@@ -759,5 +818,4 @@ This is the smallest eigenvalue because L is positive semi-definite (all eigenva
     \item \texttt{exercise3and5\_odd\_cycle\_detection\_bipartite.py} - Odd cycle detection and bipartite graphs
     \item \texttt{dfs\_exercise2\_2colorability\_algorithm.py} - 2-colorability algorithm
 \end{itemize}
-
 \end{document}
