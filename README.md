@@ -1,4 +1,4 @@
-# Graph Management Exercises
+# Massive Graph Management and Analytics Exercises
 
 This repository contains solutions to exercises for the **Massive Graph Management and Analytics** course at CentraleSupélec.
 
