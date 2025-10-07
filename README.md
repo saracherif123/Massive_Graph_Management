@@ -2,7 +2,7 @@
 
 This repository contains solutions to exercises for the **Massive Graph Management and Analytics** course at CentraleSupélec.
 
-## 📋 Contents
+## Contents
 
 ### Graph Algorithms
 - **Breadth-First Search (BFS)** - Distance computation and bipartite graph detection
@@ -16,7 +16,7 @@ This repository contains solutions to exercises for the **Massive Graph Manageme
 - **Positive Definite Matrices** - Sylvester's criterion applications
 - **Laplacian Matrices** - Graph spectral properties
 
-## 📁 Files
+## Files
 
 - `exercise1_bfs_distances.py` - BFS distance computation implementation
 - `exercise3and5_odd_cycle_detection_bipartite.py` - Odd cycle detection and bipartite graphs
@@ -24,7 +24,21 @@ This repository contains solutions to exercises for the **Massive Graph Manageme
 - `graph_management_report.tex` - Comprehensive LaTeX report with solutions
 - `graph_management_report.pdf` - Compiled report
 
-## 🎯 Key Topics Covered
+## Compilation
+
+To compile the LaTeX report:
+
+```bash
+pdflatex graph_management_report.tex
+```
+
+**Requirements:**
+- LaTeX distribution (MacTeX, TeX Live, or MiKTeX)
+- Required packages: `amsmath`, `amsfonts`, `amssymb`, `graphicx`, `geometry`, `listings`, `xcolor`, `hyperref`, `enumitem`, `tikz`, `pgfplots`, `booktabs`, `array`
+
+**Alternative:** Use online LaTeX editors like [Overleaf](https://www.overleaf.com) for easy compilation without local installation.
+
+##  Key Topics Covered
 
 - Graph traversal algorithms (BFS, DFS)
 - Bipartite graphs and 2-colorability
@@ -34,11 +48,11 @@ This repository contains solutions to exercises for the **Massive Graph Manageme
 - Linear algebra applications in graph theory
 - Spectral graph theory basics
 
-## 👨‍💻 Author
+##  Author
 
 **Sara Sherif Daoud Saad**  
 CentraleSupélec - BDMA Program
 
-## 📚 Course
+## Course
 
 Massive Graph Management and Analytics - CentraleSupélec
